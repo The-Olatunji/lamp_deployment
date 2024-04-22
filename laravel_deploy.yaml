@@ -1,0 +1,20 @@
+---
+- name: Deploy a laravel app using LAMP Stack
+  hosts: ubuntu_server
+  tasks:
+    - name: Create the destination directory
+      ansible.builtin.file:
+        path: /home/vagrant/deploy
+        state: directory
+        mode: '0755'
+
+    - name: copy bash script to slave
+      copy: 
+        src: /home/vagrant/exam/lamp_test.sh
+        dest: /home/vagrant/deploy/lamp_test.sh
+        owner: vagrant
+        group: vagrant
+        mode: '0755'
+    
+    - name: Execute script on slave
+      command: /home/vagrant/deploy/lamp_test.sh

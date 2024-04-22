@@ -18,3 +18,11 @@
     
     - name: Execute script on slave
       command: /home/vagrant/deploy/lamp_test.sh
+
+    - name: Create cron job for uptime check 
+      cron:
+        name: uptime check at every 12am
+        become: yes
+        job: "uptime >> /var/log/uptime"
+        minute: 0
+        hour: 0
